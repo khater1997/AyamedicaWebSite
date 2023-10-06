@@ -4,14 +4,14 @@ Feature: F04_blogAndEvents | user can get notified when our blog is launching an
   Scenario:  user can get notified when our blog is launching by entering his email
     When user click on blog button
     And user Show an explanatory sentence
-    And user can enter his email "mohamed3@ayamedica.com"
+    And user can enter his email "mohamed9@ayamedica.com"
     And user click on enter button
     Then user should show the success message
        #negative Scenario
   Scenario:  user enter a subscribed email
     When user click on blog button
     And user Show an explanatory sentence
-    And user can enter his email "mohamed2@ayamedica.com"
+    And user can enter his email "mohamed4@ayamedica.com"
     And user click on enter button
     Then user should show the subscription message
 

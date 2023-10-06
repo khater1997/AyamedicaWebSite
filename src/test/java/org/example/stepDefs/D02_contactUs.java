@@ -3,7 +3,6 @@ package org.example.stepDefs;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.pages.P02_contactUs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -15,25 +14,27 @@ import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.example.stepDefs.Hooks.driver;
 
 public class D02_contactUs {
-    public static P02_contactUs contactUs = new P02_contactUs();
     ArrayList<String> tabs;
 
     @When("user hover and click on call icon")
     public void user_hover_and_click_on_call_icon() {
         Actions actions = new Actions(driver);
-        actions.moveToElement(contactUs.callBtn).perform();
+        WebElement callBtn = driver.findElement(By.xpath("//div[@class='Navbar_phone_icon_list__VIODb']"));
+        actions.moveToElement(callBtn).perform();
     }
 
     @Then("can show number to call us with it")
     public void canShowNumberToCallUsWithIt() {
-
+        List<WebElement> phoneNumbers = driver.findElements(By.xpath("//div[@class='Navbar_list__Skbcw d-none']//div[@class='PhoneList_list_nums__5tn3Y']"));
         SoftAssert softAssert = new SoftAssert();
-        for (int i = 0; i < contactUs.phoneNumbers.size(); i++) {
-            String actualPhoneNum = contactUs.phoneNumbers.get(i).getText();
+
+        for (int i = 0; i < phoneNumbers.size(); i++) {
+            String actualPhoneNum = phoneNumbers.get(i).getText();
             String expectedPhoneNumbers = "+201156677424";
             softAssert.assertTrue(actualPhoneNum.contains(expectedPhoneNumbers), "assertion failed ");
             softAssert.assertAll();
@@ -45,13 +46,27 @@ public class D02_contactUs {
 
         WebElement contactButton = driver.findElement(By.xpath("//button[normalize-space()='Contact Us']"));
         contactButton.click();
-        contactUs.firstName.sendKeys("Mohamed");
-        contactUs.lastName.sendKeys("Khater");
-        contactUs.email.sendKeys("mo.khater@ayamedica.com");
-        contactUs.countryBox.click();
-        contactUs.countryCode.click();
-        contactUs.phoneNum.sendKeys("01096347693");
-        contactUs.message.sendKeys("Ayamedica, let's talk");
+
+        WebElement firstName = driver.findElement(By.xpath("//input[@id='firstName']"));
+        firstName.sendKeys("Mohamed");
+
+        WebElement lastName = driver.findElement(By.xpath("//input[@id='lastName']"));
+        lastName.sendKeys("Khater");
+
+        WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
+        email.sendKeys("mo.khater@ayamedica.com");
+
+        WebElement countryBox = driver.findElement(By.xpath("//div[@class='ReactFlagsSelect-module_flagsSelect__2pfa2 menu-flags']"));
+        countryBox.click();
+
+        WebElement countryCode = driver.findElement(By.id("rfs-EG"));
+        countryCode.click();
+
+        WebElement phoneNum = driver.findElement(By.xpath("//input[@id='phoneNumber']"));
+        phoneNum.sendKeys("01096347693");
+
+        WebElement message = driver.findElement(By.xpath("//input[@id='message']"));
+        message.sendKeys("Ayamedica, let's talk");
         Thread.sleep(1000);
     }
 
@@ -62,7 +77,8 @@ public class D02_contactUs {
                 "//button[normalize-space()='Send']"));
         sendButton.click();
         Thread.sleep(1000);
-        String actualSuccessMessage = contactUs.successMes.getText();
+
+        String actualSuccessMessage = driver.findElement(By.xpath("//div[@class='MessageRecieved_form__vwdwm']")).getText();
         System.out.println(actualSuccessMessage);
         Assert.assertTrue(actualSuccessMessage.contains("Your message has been sent Successfully"), "Assertion is Failed");
 
@@ -93,7 +109,7 @@ public class D02_contactUs {
     @Then("user navigate to facebook page {string} and opened in new tab")
     public void userNavigateToFacebookPageAndOpenedInNewTab(String expectedFacebookUrl) throws InterruptedException {
         driver.switchTo().window(tabs.get(1));
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         String actualFacebookUrl = driver.getCurrentUrl();     //get tab 1 (facebook page) url
         System.out.println(actualFacebookUrl);                         // to confirm when run
 
@@ -117,7 +133,7 @@ public class D02_contactUs {
     @Then("user navigate to instagram page {string} and opened in new tab")
     public void userNavigateToInstagramPageAndOpenedInNewTab(String expectedFacebookUrl) throws InterruptedException {
         driver.switchTo().window(tabs.get(1));
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         String actualInstagramUrl = driver.getCurrentUrl();     //get tab 1 (instagram page) url
         System.out.println(actualInstagramUrl);                         // to confirm when run
 
@@ -140,7 +156,7 @@ public class D02_contactUs {
     @Then("user navigate to rss page{string} and opened in new tab")
     public void userNavigateToRssPageAndOpenedInNewTab(String expectedWhatsappUrl) throws InterruptedException {
         driver.switchTo().window(tabs.get(1));
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         String actualInstagramUrl = driver.getCurrentUrl();     //get tab 1 (whatsapp page) url
         System.out.println(actualInstagramUrl);                         // to confirm when run
 
@@ -163,7 +179,7 @@ public class D02_contactUs {
     @Then("user navigate to linkedin page {string} and opened in new tab")
     public void userNavigateToLinkedinPageAndOpenedInNewTab(String expectedLinkedinUrl) throws InterruptedException {
         driver.switchTo().window(tabs.get(1));
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         String actualInstagramUrl = driver.getCurrentUrl();     //get tab 1 (linkedin page) url
         System.out.println(actualInstagramUrl);                         // to confirm when run
 
@@ -187,7 +203,7 @@ public class D02_contactUs {
     @Then("user navigate to youtube page {string} and opened in new tab")
     public void userNavigateToYoutubePageAndOpenedInNewTab(String expectedYoutubeUrl) throws InterruptedException {
         driver.switchTo().window(tabs.get(1));
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         String actualInstagramUrl = driver.getCurrentUrl();     //get tab 1 (youtube page) url
         System.out.println(actualInstagramUrl);                         // to confirm when run
 

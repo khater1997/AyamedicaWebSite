@@ -5,7 +5,6 @@ import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 
@@ -15,15 +14,13 @@ public class Hooks {
     @Before
     public static void openBrowser() {
 
-        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.chromedriver().setup();
 
-       driver = new FirefoxDriver();
-
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.manage().window().maximize();
+        driver.get("https://www.ayamedica.com/");
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        driver.navigate().to("https://www.ayamedica.com/");
     }
 
     @After
