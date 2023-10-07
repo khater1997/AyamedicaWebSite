@@ -16,8 +16,8 @@ public class D03_aboutUs {
 
     @When("user hover and click on about button")
     public void user_hover_and_click_on_about_button() throws InterruptedException {
-        WebElement aboutBtn = driver.findElement(By.xpath("//a[@class='NavLink_activeLink__ejjhE']"));
         Actions actions = new Actions(driver);
+        WebElement aboutBtn = driver.findElement(By.xpath("//a[@href='/about-us']"));
         actions.moveToElement(aboutBtn).perform();
         aboutBtn.click();
         Thread.sleep(4000);
@@ -25,21 +25,20 @@ public class D03_aboutUs {
 
     @Then("user could show our story")
     public void user_could_show_our_story() {
-        WebElement ourStory = driver.findElement(By.xpath("//p[@class='AboutUsPage_desc__ywTUt']"));
-        String actualResult = ourStory.getText();
-        System.out.println(actualResult);
+        String ourStoryActualResult = driver.findElement(By.xpath("//p[@class='AboutUsPage_desc__ywTUt']")).getText();
+        System.out.println(ourStoryActualResult);
         String expectedResult = "When relocation to Egypt, his goal was to offer the most comprehensive medical system to the Egyptian market";
-        Assert.assertTrue(actualResult.contains(expectedResult), "Assertion is failed");
+        Assert.assertTrue(ourStoryActualResult.contains(expectedResult), "Assertion is failed");
 
     }
 
     @And("user could scroll to know what we do")
     public void userCouldScrollToKnowWhatWeDo() {
-
-        String aboutBtnActualResult = driver.findElement(By.xpath("//p[@class='SectionLayout_desc__xJ9-X']")).getText();
-        System.out.println(aboutBtnActualResult);
+        WebElement whatWeDo =driver.findElement(By.xpath("//p[@class='SectionLayout_desc__xJ9-X']"));
+        String whatWeDoActualResult = whatWeDo.getText();
+        System.out.println(whatWeDoActualResult);
         String expectedResult = "Ayamedica’s solutions connect the patient with their own medical records, as provided by the medical professional, in a method that is secure, accessible and discrete";
-        Assert.assertEquals(expectedResult, aboutBtnActualResult, "Assertion is failed");
+        Assert.assertEquals(expectedResult, whatWeDoActualResult, "Assertion is failed");
     }
 
     @And("user show the options")

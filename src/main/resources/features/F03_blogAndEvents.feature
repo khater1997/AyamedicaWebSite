@@ -1,10 +1,10 @@
 @smoke
-Feature: F04_blogAndEvents | user can get notified when our blog is launching and show our Events
+Feature: F03_blogAndEvents | user can get notified when our blog is launching and show our Events
        #positive Scenario
   Scenario:  user can get notified when our blog is launching by entering his email
     When user click on blog button
     And user Show an explanatory sentence
-    And user can enter his email "mohamed9@ayamedica.com"
+    And user can enter his email "mohamed15@ayamedica.com"
     And user click on enter button
     Then user should show the success message
        #negative Scenario

@@ -1,5 +1,5 @@
 @smoke
-Feature: F03_aboutUs | user can follow us on social media by one click
+Feature: F05_aboutUs | user can follow us on social media by one click
 
   Scenario:User going to About page
     When user hover and click on about button

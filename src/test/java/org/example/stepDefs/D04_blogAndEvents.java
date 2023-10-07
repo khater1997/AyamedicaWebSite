@@ -48,12 +48,12 @@ public class D04_blogAndEvents {
     }
 
     @Then("user should show the success message")
-    public void userShouldShowTheSuccessMessage() {
+    public void userShouldShowTheSuccessMessage() throws InterruptedException {
         String successMessageActualSuccessMessage = driver.findElement(By.xpath(
-                "//div[@class='MessageRecieved_form__vwdwm']")).getText();
+                "//p[@class='MessageRecieved_desc__mVY3g']")).getText();
         System.out.println(successMessageActualSuccessMessage);
-        Assert.assertTrue(successMessageActualSuccessMessage.contains("We will send you an email to let you know when the blog is ready for commenting and interaction"), "Assertion is Failed");
-
+        Assert.assertTrue(successMessageActualSuccessMessage.equals("We will send you an email to let you know when the blog is ready for commenting and interaction"), "Assertion is Failed");
+        Thread.sleep(1000);
         WebElement done2Button = driver.findElement(By.xpath(
                 "//button[normalize-space()='Done']"));
         done2Button.click();

@@ -3,7 +3,6 @@ package org.example.stepDefs;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.pages.P05_partner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +15,6 @@ import java.time.Duration;
 import static org.example.stepDefs.Hooks.driver;
 
 public class D05_partner {
-    P05_partner partner = new P05_partner();
 
     @When("user click on our partner button")
     public void user_click_on_our_partner_button() throws InterruptedException {
